@@ -1,0 +1,77 @@
+.my-orders {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.my-orders h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.my-orders .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.my-orders-order {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.my-orders-order:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.my-orders-order img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.my-orders-order p {
+  margin: 5px 0;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.my-orders-order p span {
+  color: tomato;
+  margin-right: 5px;
+}
+
+.my-orders-order button {
+  margin-top: 10px;
+  align-self: flex-end;
+  padding: 8px 12px;
+  background-color: tomato;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.my-orders-order button:hover {
+  background-color: rgb(43, 202, 43);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .my-orders .container {
+    grid-template-columns: 1fr;
+  }
+
+  .my-orders-order {
+    padding: 12px;
+  }
+}
