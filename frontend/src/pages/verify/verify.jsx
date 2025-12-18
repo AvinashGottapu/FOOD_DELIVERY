@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
+import { StoreContext } from "../../context/storecontext";
 
 const Verify = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { setcartitems } = useContext(StoreContext);
 
   useEffect(() => {
     const verifyPayment = async () => {
@@ -28,6 +30,8 @@ const Verify = () => {
         );
 
         if (response.data.success) {
+          // Clear cart in frontend state after successful payment
+          setcartitems({});
           navigate("/myorders");
         } else {
           navigate("/");

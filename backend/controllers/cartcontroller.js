@@ -1,49 +1,57 @@
-let cartData = {}; 
+import usermodel from "../models/usermodel.js";
 
-const addToCart = (req, res) => { 
+const addToCart = async (req, res) => {
   try {
+    const userId = req.userId;
     const itemId = req.body.ItemId;
-    cartData[itemId] = (cartData[itemId] || 0) + 1;
+
+    const user = await usermodel.findById(userId);
+
+    user.cartdata[itemId] = (user.cartdata[itemId] || 0) + 1;
+    await user.save();
 
     res.json({
       success: true,
-      message: 'Added to cart',
-      cartdata: cartData
+      message: "Added to cart",
+      cartdata: user.cartdata
     });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: 'Error adding to cart' });
+  } catch (err) {
+    res.status(500).json({ success: false });
   }
 };
 
-const removeFromCart = (req, res) => {
+const removeFromCart = async (req, res) => {
   try {
+    const userId = req.userId;
     const itemId = req.body.ItemId;
-    if (cartData[itemId] > 0) {
-      cartData[itemId] -= 1;
-      if (cartData[itemId] === 0) delete cartData[itemId]; // clean up empty
+
+    const user = await usermodel.findById(userId);
+
+    if (user.cartdata[itemId] > 0) {
+      user.cartdata[itemId] -= 1;
+      if (user.cartdata[itemId] === 0) delete user.cartdata[itemId];
     }
 
+    await user.save();
+
     res.json({
       success: true,
-      message: 'Removed from cart',
-      cartdata: cartData
+      cartdata: user.cartdata
     });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: 'Error removing from cart' });
+  } catch (err) {
+    res.status(500).json({ success: false });
   }
 };
 
-const getCart = (req, res) => {
+const getCart = async (req, res) => {
   try {
+    const user = await usermodel.findById(req.userId);
     res.json({
       success: true,
-      cartdata: cartData
+      cartdata: user.cartdata
     });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: 'Error fetching cart' });
+  } catch (err) {
+    res.status(500).json({ success: false });
   }
 };
 

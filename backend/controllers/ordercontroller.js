@@ -101,10 +101,13 @@ const verifyOrder = async (req, res) => {
       await newOrder.save();
 
       // Clear user's cart
-      await usermodel.updateOne(
-        { _id: userId },
-        { $set: { cartdata: {} } }
-      );
+      const result = await usermodel.updateOne(
+  { _id: userId },
+  { $set: { cartdata: {} } }
+);
+
+      console.log("UPDATE RESULT:", result);
+
       console.log("✅ Cart cleared successfully for user:", userId);
 
       return res.json({ success: true, message: "Order created successfully" });
