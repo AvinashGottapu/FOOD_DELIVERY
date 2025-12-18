@@ -6,7 +6,7 @@ import axios from 'axios';
 import { toast } from "react-toastify";
 
 const PlaceOrder = () => {  
-    const { getTotalCartAmount, token, food_list,cartitems, url , setcartitems } = useContext(StoreContext);
+    const { getTotalCartAmount, token, food_list,cartitems, url } = useContext(StoreContext);
     const navigate = useNavigate();
     
     const [data, setData] = useState({ 
