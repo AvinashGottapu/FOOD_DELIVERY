@@ -28,11 +28,11 @@ const PlaceOrder = () => {
         }
 
         let orderItems = [];
-        food_list.map(item => {
-            if(cartitems[item._id] > 0) {
-                let itemInfo = item;
-                itemInfo['quantity'] = cartitems[item._id];
-                orderItems.push(itemInfo); 
+        food_list.forEach(item => {
+            if (cartitems[item._id] > 0) {
+                // Clone item so we don't mutate the original food_list objects
+                const itemInfo = { ...item, quantity: cartitems[item._id] };
+                orderItems.push(itemInfo);
             }
         });
 

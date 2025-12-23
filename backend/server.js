@@ -8,10 +8,10 @@ import orderRouter from './routes/orderRoute.js';
 import 'dotenv/config';
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000; 
 
 // Connect to MongoDB
-connectToMongoDB(process.env.MONGODB ?? "mongodb://localhost:27017/food_delivery")
+connectToMongoDB()
     .then(() => console.log("✅ MongoDB connected"));
 
 // MIDDLEWARES
@@ -28,7 +28,7 @@ app.use('/api/order', orderRouter);
 // Root route
 app.get('/', (req, res) => res.send('API is working'));
 
-// Start server
+// Start server 
 app.listen(PORT, () => {
     console.log(`✅ Server running on http://localhost:${PORT}`);
 });

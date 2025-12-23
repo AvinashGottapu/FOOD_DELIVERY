@@ -1,10 +1,12 @@
 import mongoose from 'mongoose'
+import 'dotenv/config';
 
-export const connectToMongoDB = async (uri) => {
+export const connectToMongoDB = async () => {
   try {
-    await mongoose.connect(uri);
-    console.log("✅ MongoDB connected");
-  } catch (error) {
-    console.error("❌ MongoDB Connection Failed:", error);
+    // Accessing the URI from your .env file
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("✅ Database Connected: Food_Del");
+  } catch (err) {
+    console.error("❌ Connection Error:", err.message);
   }
 };
